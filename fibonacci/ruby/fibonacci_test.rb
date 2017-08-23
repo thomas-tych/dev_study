@@ -1,6 +1,5 @@
 require 'minitest/autorun'
 require 'minitest/unit'
-require 'minitest/rg'
 
 require_relative __FILE__.chomp('_test.rb')
 
@@ -36,11 +35,11 @@ class FibonacciTest < Minitest::Test
     define_method("test_that_fibonacci_basic_for_#{n}_returns_#{expected_result}") do
       assert_equal(expected_result, Fibonacci.fibonacci_basic(n))
     end
-    
+
     define_method("test_that_fibonacci_memoized_for_#{n}_returns_#{expected_result}") do
       assert_equal(expected_result, Fibonacci.fibonacci_memoized(n))
     end
-    
+
     define_method("test_that_fibonacci_iterative_for_#{n}_returns_#{expected_result}") do
       assert_equal(expected_result, Fibonacci.fibonacci_iterative(n))
     end
