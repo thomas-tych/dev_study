@@ -6,3 +6,5 @@ gem 'faker'
 
 gem 'rubocop'
 gem 'reek'
+
+gem 'byebug'
