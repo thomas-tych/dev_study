@@ -15,6 +15,14 @@ module Trees
         return value <=> other.value if other.is_a? self.class
         value <=> other
       end
+
+      def leaf?
+        return false if left || right
+        true
+      end
+
+      def isolate
+      end
     end
   end
 end

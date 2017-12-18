@@ -139,4 +139,53 @@ class TreeTest < Minitest::Test
     tree.each_post { |value| post_order_values << value }
     assert_equal(expected_post_order_values, post_order_values)
   end
+
+  def test_that_remove_of_unexistant_value_return_a_falsy
+    tree = Trees::BinarySearch::Tree.new
+    values = [25, 21, 83]
+    values.each { |value| tree.add(value) }
+
+    refute(tree.remove(22))
+  end
+
+  def test_that_remove_update_tree_for_scenario_1
+    # node_to_remove_has_no_right_child
+    tree = Trees::BinarySearch::Tree.new
+    values = [25, 21, 83]
+    values.each { |value| tree.add(value) }
+
+    assert(tree.find(21))
+    assert(tree.find(83))
+    tree.remove(21)
+    refute(tree.find(21))
+    assert(tree.find(83))
+    tree.remove(83)
+    refute(tree.find(83))
+
+    assert(tree.find(25))
+  end
+
+  def test_that_remove_update_tree_for_scenario_2
+    # node_to_remove_right_child_has_no_left_child
+    tree = Trees::BinarySearch::Tree.new
+    values = [4, 6, 5, 7, 8]
+    values.each { |value| tree.add(value) }
+
+    assert(tree.find(6))
+    tree.remove(6)
+    refute(tree.find(6))
+    values.each { |v| assert(tree.find(v)) if v != 6 }
+  end
+
+  def test_that_remove_update_tree_for_scenario_3
+    # node_to_remove_is_replaced_by_right-leftmost_node
+    tree = Trees::BinarySearch::Tree.new
+    values = [4, 2, 6, 5, 10, 7, 8]
+    values.each { |value| tree.add(value) }
+
+    assert(tree.find(6))
+    tree.remove(6)
+    refute(tree.find(6))
+    values.each { |v| assert(tree.find(v)) if v != 6 }
+  end
 end
